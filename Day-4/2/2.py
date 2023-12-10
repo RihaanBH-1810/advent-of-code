@@ -3,7 +3,8 @@ line_list = file.readlines()
 tot = 0
 listk = []
 scores = []
-
+for i in line_list:
+    listk.append(1)
 for i,line in enumerate(line_list):
     pos = []
     score = 0
@@ -17,17 +18,20 @@ for i,line in enumerate(line_list):
     winning_no_Llist = line_arr[pos[0]+1:pos[1]]
     no_list = line_arr[pos[1]+1:]
     
-    
     for item in no_list:
         if item in winning_no_Llist:
-            if score ==0:
-                score += 1
-            else:
-                score *= 2
-    
+            score += 1
+    no = listk[i]
+    while no:
+        for j in range(i+1, i+score+1):
+            listk[j] += 1
+        no -= 1
     scores.append(score)
 
 
-for score in scores:
-    tot += score
-print(tot)
+print(scores)
+print(listk)
+
+for i in range(len(scores)):
+    tot += (scores[i]*listk[i])
+print(tot+len(line_list))
